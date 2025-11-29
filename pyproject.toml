@@ -12,10 +12,17 @@ dependencies = [
     "uvicorn (>=0.38.0,<0.39.0)",
     "sqlalchemy (>=2.0.44,<3.0.0)",
     "pydantic[dotenv] (>=2.12.3,<3.0.0)",
-    "python-dotenv (>=1.2.1,<2.0.0)"
+    "python-dotenv (>=1.2.1,<2.0.0)",
+    "pydantic-settings (>=2.12.0,<3.0.0)",
+    "psycopg2 (>=2.9.11,<3.0.0)"
 ]
 
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "alembic (>=1.17.1,<2.0.0)"
+]
