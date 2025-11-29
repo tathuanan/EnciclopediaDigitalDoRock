@@ -11,8 +11,5 @@ class ArtistaService(BaseService[Artista, ArtistaCreate, ArtistaUpdate]):
         super().__init__(ArtistaRepository(db))
         self.__artista_repository: ArtistaRepository = self._repository
 
-    def create(self, obj_in: ArtistaCreate) -> Artista:
-        return super().create(obj_in)
-
     def get_by_nome(self, termo: str) -> List[Artista]:
         return self.__artista_repository.get_by_nome_parcial(termo)
