@@ -1,10 +1,11 @@
 from fastapi import APIRouter
-from app.api.v1.routers import bandas, albuns, artistas, estilos_musicais, instrumentos, musicas
+from app.api.v1.routers import bandas, albuns, artistas, estilos_musicais, instrumentos, musicas, auth
 
 api_router = APIRouter()
 
 api_router.include_router(artistas.router, prefix="/artistas", tags=["Artistas"])
 api_router.include_router(albuns.router, prefix="/albuns", tags=["Álbuns"])
+api_router.include_router(auth.router, prefix="/auth", tags=["Login"])
 api_router.include_router(bandas.router, prefix="/bandas", tags=["Bandas"])
 api_router.include_router(estilos_musicais.router, prefix="/estilos-musicais", tags=["Estilos Musicais"])
 api_router.include_router(instrumentos.router, prefix="/instrumentos", tags=["Instrumentos"])
