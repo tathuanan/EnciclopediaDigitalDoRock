@@ -55,7 +55,7 @@ Responsável por:
 Certifique-se de ter instalado:
 
 - Python 3.12+
-- PostgreSQL (Rodando localmente ou via Docker)
+- PostgreSQL Recomendado 16+ (Rodando localmente ou via Docker)
 - Git (Para clonar o projeto)
 
 ### 2. Instalação de pacotes necessários
