@@ -93,7 +93,7 @@ POSTGRES_DB=o_nome_do_seu_banco_aqui
 
 Foi criado um script utilitário para facilitar a configuração inicial.
 
-**Passo A: Criar Banco e Tabelas.** Este comando cria o banco conforme o nome setado em POSTGRES_DB no arquivo .env (se não existir) e roda as migrações do Alembic.
+**Passo 1: Criar Banco e Tabelas.** Este comando cria o banco conforme o nome setado em POSTGRES_DB no arquivo .env (se não existir) e roda as migration do Alembic.
 ```bash
 # Nota: Se você fez alterações nos Models e precisa gerar uma nova migration
 # antes de rodar o comando abaixo, use: poetry run alembic revision --autogenerate -m "descricao da mudanca"
@@ -101,7 +101,7 @@ Foi criado um script utilitário para facilitar a configuração inicial.
 poetry run python scripts/init_db.py
 ```
 
-**Passo B: Criar Usuário Administrador.** Para integração com o Front-End como o sistema possui um administrador único gerenciado via banco, crie-o com este comando:
+**Passo 2: Criar Usuário Administrador.** Para integração com o Front-End como o sistema possui um administrador único gerenciado via banco, crie-o com este comando:
 ```bash
 # Edite o arquivo scripts/create_admin.py se quiser mudar o email/senha padrão
 
