@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Text
 from sqlalchemy.orm import relationship
 from app.core.base import Base
 
@@ -8,6 +8,6 @@ class EstiloMusical(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     nome = Column(String, nullable=False, unique=True)
-    descricao = Column(String, nullable=False)
+    descricao = Column(Text, nullable=False)
 
     bandas = relationship("Banda", back_populates="estilo_musical")

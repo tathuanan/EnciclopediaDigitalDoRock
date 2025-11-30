@@ -12,7 +12,7 @@ class Banda(Base):
     ano_formacao = Column(Integer, nullable=True)
     pais_origem = Column(String, nullable=True)
     em_atividade = Column(Boolean, nullable=True, default=None)
-    influencias = Column(String, nullable=True)
+    influencias = Column(Text, nullable=True)
 
     albuns = relationship("Album", back_populates="banda", cascade="all, delete-orphan")
     artistas = relationship("Artista", secondary="banda_artista", back_populates="bandas")
