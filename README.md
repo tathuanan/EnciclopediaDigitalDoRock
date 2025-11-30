@@ -112,7 +112,7 @@ poetry run python scripts/create_admin.py
 Inicie o servidor de desenvolvimento:
 
 ```bash
-poetry run uvicorn main:app --reload
+poetry run uvicorn app.main:app --reload
 ```
 Acesse a documentação interativa (Swagger UI) em:👉 http://localhost:8000/docs
 
