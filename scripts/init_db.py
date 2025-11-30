@@ -79,7 +79,7 @@ def run_migrations():
         ensure_migrations_exist(alembic_cfg)
         logger.info("🚀 Aplicando 'upgrade head'...")
         command.upgrade(alembic_cfg, "head")
-        logger.info("✅ Todas as migrações foram aplicadas!")
+        print("✅ Todas as migrações foram aplicadas!")
 
     except Exception as e:
         logger.error(f"❌ Erro crítico ao aplicar migrações: {e}")
