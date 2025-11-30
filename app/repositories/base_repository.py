@@ -33,7 +33,7 @@ class BaseRepository(Generic[T]):
         return db_obj
 
     def delete(self, modelo_id: int) -> bool:
-        obj = self._get_by_id(modelo_id)
+        obj = self.get_by_id(modelo_id)
         if obj:
             self._db.delete(obj)
             self._db.commit()
