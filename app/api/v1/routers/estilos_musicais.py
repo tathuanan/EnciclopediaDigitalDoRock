@@ -13,7 +13,7 @@ def get_estilo_service(db: Session = Depends(get_db)) -> EstiloMusicalService:
 
 
 @router.get("/busca", response_model=List[EstiloMusical])
-def buscar_artista_por_banda(
+def buscar_estilo_musical_por_banda(
         banda: Optional[str] = Query(None, min_length=2, description="Nome da banda"),
         service: EstiloMusicalService = Depends(get_estilo_service),
 ):
