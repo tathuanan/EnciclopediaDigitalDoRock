@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional
-from datetime import datetime
+from datetime import date
 from app.schemas.instrumento import Instrumento
 
 
@@ -22,7 +22,7 @@ class AlbumSimples(BaseModel):
 
 class ArtistaBase(BaseModel):
     nome: str
-    data_nascimento: datetime = Field(..., alias="dataNascimento")
+    data_nascimento: date = Field(..., alias="dataNascimento")
     pais_origem: str = Field(..., alias="paisOrigem")
     bio: str
 
@@ -36,7 +36,7 @@ class ArtistaCreate(ArtistaBase):
 
 class ArtistaUpdate(BaseModel):
     nome: Optional[str] = None
-    data_nascimento: Optional[datetime] = Field(None, alias="dataNascimento")
+    data_nascimento: Optional[date] = Field(None, alias="dataNascimento")
     pais_origem: Optional[str] = Field(None, alias="paisOrigem")
     bio: Optional[str] = None
     instrumento_ids: Optional[List[int]] = None
