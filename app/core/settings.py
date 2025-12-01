@@ -1,4 +1,7 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+import os
+
+env_file_path = os.environ.get("ENV_FILE", ".env")
 
 
 class Settings(BaseSettings):
@@ -21,9 +24,10 @@ class Settings(BaseSettings):
         )
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=env_file_path if os.path.exists(env_file_path) else None,
         env_file_encoding="utf-8",
-        case_sensitive=True
+        case_sensitive=True,
+        extra='ignore'
     )
 
 
