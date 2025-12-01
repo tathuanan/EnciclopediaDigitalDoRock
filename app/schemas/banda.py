@@ -13,6 +13,16 @@ class AlbumSimples(BaseModel):
         populate_by_name = True
 
 
+class ArtistaSimples(BaseModel):
+    id: int
+    nome: str
+    pais_origem: str = Field(..., alias="paisOrigem")
+
+    class Config:
+        from_attributes = True
+        populate_by_name = True
+
+
 class BandaBase(BaseModel):
     nome: str
     descricao: Optional[str] = None
@@ -27,6 +37,7 @@ class BandaBase(BaseModel):
 
 class BandaCreate(BandaBase):
     estilo_musical_id: Optional[int] = Field(None, alias="estiloMusicalId")
+    artista_ids: List[int] = Field(default=[], alias="artistaIds")
 
 
 class BandaUpdate(BaseModel):
@@ -37,6 +48,7 @@ class BandaUpdate(BaseModel):
     em_atividade: Optional[bool] = Field(None, alias="emAtividade")
     influencias: Optional[str] = Field(None, alias="influenciasTexto")
     estilo_musical_id: Optional[int] = Field(None, alias="estiloMusicalId")
+    artista_ids: Optional[List[int]] = Field(None, alias="artistaIds")
 
     class Config:
         populate_by_name = True
@@ -46,6 +58,7 @@ class Banda(BandaBase):
     id: int
     estilo_musical: Optional[EstiloMusical] = Field(None, alias="estiloMusical")
     albuns: List[AlbumSimples] = Field(default=[], alias="albums")
+    artistas: List[ArtistaSimples] = Field(default=[], alias="artistas")
 
     class Config:
         from_attributes = True
