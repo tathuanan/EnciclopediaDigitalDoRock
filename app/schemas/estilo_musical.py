@@ -1,5 +1,14 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
+
+
+class BandaSimples(BaseModel):
+    id: int
+    nome: str
+
+    class Config:
+        from_attributes = True
+        populate_by_name = True
 
 
 class EstiloMusicalBase(BaseModel):
@@ -24,6 +33,7 @@ class EstiloMusicalUpdate(BaseModel):
 
 class EstiloMusical(EstiloMusicalBase):
     id: int
+    bandas: List[BandaSimples] = []
 
     class Config:
         from_attributes = True

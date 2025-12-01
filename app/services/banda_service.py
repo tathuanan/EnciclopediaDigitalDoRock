@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from sqlalchemy.orm import Session
 from app.models.banda import Banda
 from app.models.artista import Artista
@@ -17,6 +17,30 @@ class BandaService(BaseService[Banda, BandaCreate, BandaUpdate]):
         if len(termo) < 2:
             return []
         return self.__banda_repository.get_by_nome_parcial(termo)
+
+    def buscar_com_filtros(
+            self,
+            nome: Optional[str] = None,
+            estilo: Optional[str] = None,
+            artista: Optional[str] = None,
+    ) -> List[Banda]:
+        resultados = []
+
+        if nome:
+            resultados.extend(self.get_by_nome(nome))
+        if estilo:
+            resultados.extend(self.__banda_repository.get_by_estilo(estilo))
+        if artista:
+            resultados.extend(self.__banda_repository.get_by_artista(artista))
+
+        seen = set()
+        unique_resultados = []
+        for b in resultados:
+            if b.id not in seen:
+                unique_resultados.append(b)
+                seen.add(b.id)
+
+        return unique_resultados
 
     def create(self, obj_in: BandaCreate) -> Banda:
         dados_banda = obj_in.model_dump(exclude={"artista_ids"})
@@ -46,4 +70,4 @@ class BandaService(BaseService[Banda, BandaCreate, BandaUpdate]):
                 artistas_db = self.__db.query(Artista).filter(Artista.id.in_(ids)).all()
                 banda_db.artistas = artistas_db
 
-        return self._repository.update(banda_db, dados_update)
+        return self.__banda_repository.update(banda_db, dados_update)

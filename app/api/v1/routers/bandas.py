@@ -1,5 +1,5 @@
-from typing import List
-from fastapi import APIRouter, Depends, HTTPException, status
+from typing import List, Optional
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.schemas.banda import BandaCreate, Banda, BandaUpdate
@@ -10,6 +10,20 @@ router = APIRouter()
 
 def get_banda_service(db: Session = Depends(get_db)) -> BandaService:
     return BandaService(db)
+
+
+@router.get("/busca", response_model=List[Banda])
+def buscar_bandas(
+        nome: Optional[str] = Query(None, min_length=2, description="Nome da banda"),
+        estilo: Optional[str] = Query(None, min_length=2, description="Nome do estilo musical"),
+        artista: Optional[str] = Query(None, min_length=2, description="Nome de um integrante"),
+        service: BandaService = Depends(get_banda_service)
+):
+    return service.buscar_com_filtros(
+        nome=nome,
+        estilo=estilo,
+        artista=artista,
+    )
 
 
 @router.post("/", response_model=Banda, status_code=status.HTTP_201_CREATED)

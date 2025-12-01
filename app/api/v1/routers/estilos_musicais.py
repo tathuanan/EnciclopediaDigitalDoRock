@@ -1,5 +1,5 @@
-from typing import List
-from fastapi import APIRouter, Depends, HTTPException, status
+from typing import List, Optional
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.schemas.estilo_musical import EstiloMusicalCreate, EstiloMusical, EstiloMusicalUpdate
@@ -10,6 +10,14 @@ router = APIRouter()
 
 def get_estilo_service(db: Session = Depends(get_db)) -> EstiloMusicalService:
     return EstiloMusicalService(db)
+
+
+@router.get("/busca", response_model=List[EstiloMusical])
+def buscar_artista_por_banda(
+        banda: Optional[str] = Query(None, min_length=2, description="Nome da banda"),
+        service: EstiloMusicalService = Depends(get_estilo_service),
+):
+    return service.get_by_banda(banda)
 
 
 @router.post("/", response_model=EstiloMusical, status_code=status.HTTP_201_CREATED)

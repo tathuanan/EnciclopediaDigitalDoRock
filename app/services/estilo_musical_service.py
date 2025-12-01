@@ -13,3 +13,6 @@ class EstiloMusicalService(BaseService[EstiloMusical, EstiloMusicalCreate, Estil
 
     def get_by_nome(self, nome: str) -> List[EstiloMusical]:
         return self.__estilo_repository.get_by_nome(nome)
+
+    def get_by_banda(self, banda: str) -> List[EstiloMusical]:
+        return self.__estilo_repository.get_by_banda_nome(banda)

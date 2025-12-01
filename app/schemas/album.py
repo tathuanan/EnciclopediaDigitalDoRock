@@ -23,6 +23,7 @@ class AlbumBase(BaseModel):
 
 class AlbumCreate(AlbumBase):
     banda_id: int = Field(..., alias="bandaId")
+    artista_ids: List[int] = Field(default=[], alias="artistaIds")
 
 
 class AlbumUpdate(BaseModel):
@@ -31,6 +32,7 @@ class AlbumUpdate(BaseModel):
     gravadora: Optional[str] = None
     observacoes: Optional[str] = None
     banda_id: Optional[int] = Field(None, alias="bandaId")
+    artista_ids: Optional[List[int]] = Field(None, alias="artistaIds")
 
     class Config:
         populate_by_name = True
